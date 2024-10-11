@@ -17,7 +17,7 @@ public class GoalScript : MonoBehaviour
         // Shuyaku がゴールに触れたとき
         if (collision.CompareTag("Player"))
         {
-            gamemanager.GoalReached();
+            gamemanager.LoadScene2Screen();
         }
     }
 }

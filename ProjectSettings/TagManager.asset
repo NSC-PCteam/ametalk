@@ -8,14 +8,16 @@ TagManager:
   - Enemy
   - Jimen
   - Apple
+  - Ground
+  - Trap
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Charactor
+  - Player
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 

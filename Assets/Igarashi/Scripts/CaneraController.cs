@@ -15,22 +15,22 @@ public class CameraController : MonoBehaviour
     private Rect limitQuad;//有効中のカメラ移動制限範囲
 
     //Start
-    void Start ()
+    void Start()
     {
-        limitQuad = movingLimitter.GetSpriteRect ();
+        limitQuad = movingLimitter.GetSpriteRect();
     }
 
     /// <summary>
     /// カメラの位置を動かす
     /// </summary>
     /// <param name="targetPos">座標</param>
-    public void SetPosition (Vector2 targetPos)
+    public void SetPosition(Vector2 targetPos)
     {
         basePos = targetPos;
     }
 
     //FixedUpdate
-    private void FixedUpdate ()
+    private void FixedUpdate()
     {
         //カメラ移動
         Vector3 pos = transform.localPosition;
@@ -40,10 +40,10 @@ public class CameraController : MonoBehaviour
         //Z座標は現在値（transform.localPosition）をそのまま使用
 
         //カメラ可動範囲を反映
-        pos.x = Mathf.Clamp (pos.x, limitQuad.xMin, limitQuad.xMax);
-        pos.y = Mathf.Clamp (pos.y, limitQuad.yMin, limitQuad.yMax);
+        pos.x = Mathf.Clamp(pos.x, limitQuad.xMin, limitQuad.xMax);
+        pos.y = Mathf.Clamp(pos.y, limitQuad.yMin, limitQuad.yMax);
 
         //計算後のカメラの座標を反映
-        transform.localPosition = Vector3.Lerp (transform.localPosition, pos, 0.08f);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, pos, 0.08f);
     }
 }
