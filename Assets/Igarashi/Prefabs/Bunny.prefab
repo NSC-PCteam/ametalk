@@ -171,9 +171,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingSpeed: 3
   maxSpeed: 5
-  awakeDistance: 6
+  awakeDistance: 3
   brakeRatio: 2
-  rb: {fileID: 0}
+  rb: {fileID: 5151877970493986590}
 --- !u!61 &4485344700328231995
 BoxCollider2D:
   m_ObjectHideFlags: 0
