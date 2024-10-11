@@ -13,6 +13,7 @@ public class BossSkull : MonoBehaviour
 
     public float minY = -2f;               // 移動可能な最小Y座標
     public float maxY = 5f;                // 移動可能な最大Y座標
+    public Vector3 startPosition;          // 元の場所を指定可能に
 
     private bool hasBarrier = true;        // バリアを持っているかどうか
     private int stompCount = 0;            // ボスが踏まれた回数
@@ -21,19 +22,18 @@ public class BossSkull : MonoBehaviour
     private int attackCount = 0;           // バリアなしでの攻撃回数
     private bool isReturning = false;      // ボスが元の位置に戻っている状態かどうか
     private bool isInvincible = false;     // 無敵状態かどうか
+    private Vector3 moveDirection;         // 現在の進行方向
 
     private Rigidbody2D rb;
     private Animator anim;
     private GameObject player;
-
-    private Vector3 startPosition;         // ボスの初期位置
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");  // プレイヤーのタグを持つオブジェクトを探す
-        startPosition = transform.position;  // ボスの初期位置を保存
+        moveDirection = Vector3.left;       // 初期進行方向
     }
 
     void Update()
@@ -58,8 +58,14 @@ public class BossSkull : MonoBehaviour
     // ボスの波状移動
     private void MoveInWavePattern()
     {
-        Vector3 direction = (player.transform.position - transform.position).normalized;  // プレイヤーへの方向
-        Vector3 waveOffset = new Vector3(0, Mathf.Sin(Time.time * waveFrequency) * waveAmplitude, 0);  // 波移動の上下振れ幅
+        // プレイヤーがボスより下にいるときのみ、プレイヤーの方向に進行方向を設定
+        if (player.transform.position.y <= transform.position.y)
+        {
+            moveDirection = (player.transform.position - transform.position).normalized; // プレイヤーの方向
+        }
+
+        // 現在の方向に波のオフセットを追加
+        Vector3 waveOffset = new Vector3(0, Mathf.Sin(Time.time * waveFrequency) * waveAmplitude, 0);
 
         float currentSpeed = moveSpeed;
 
@@ -69,12 +75,26 @@ public class BossSkull : MonoBehaviour
         }
 
         // X方向の移動速度に波移動を加算し、Y座標の上限を設定
-        rb.velocity = direction * currentSpeed + waveOffset;
+        rb.velocity = moveDirection * currentSpeed + waveOffset;
 
-        // Y座標の上限をmaxYに制限
+        // Y座標の上限と下限を設定
         if (transform.position.y > maxY)
         {
             transform.position = new Vector3(transform.position.x, maxY, transform.position.z);
+        }
+        else if (transform.position.y < minY)
+        {
+            transform.position = new Vector3(transform.position.x, minY, transform.position.z);
+        }
+
+        // スプライトの方向を反転させる
+        if (moveDirection.x > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1); // 右向き
+        }
+        else if (moveDirection.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1); // 左向き
         }
     }
 
@@ -153,10 +173,6 @@ public class BossSkull : MonoBehaviour
         if (attackCount == 1 || attackCount == 2)
         {
             StartCoroutine(ReturnToStartPosition());  // 1回目と2回目の攻撃で元の位置に戻る
-        }
-        else if (attackCount >= 3)
-        {
-            speedMultiplier = 1f;  // 3回目の攻撃で速度を通常に戻す
         }
     }
 
