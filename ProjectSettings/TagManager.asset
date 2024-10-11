@@ -4,20 +4,21 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Traps
-  - Enemy
+
   - Jimen
-  - Apple
+  - Ground
+  - Enemy
+  - Trap
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Charactor
+  - Jimen
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Ground
+  - Enemy
+  - Player
   - 
   - 
   - 
