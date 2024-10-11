@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shuyaku_Kari : MonoBehaviour
+
+
+public class Syuyaku : MonoBehaviour
 {
     // 移動速度とダッシュ速度（Inspectorで調整可能）
     public float moveSpeed = 5f;
     public float dashSpeed = 10f;
 
-    //敵を踏んだ後のジャンプ力
+    // 敵を踏んだ後のジャンプ力
     public float stompJumpForce = 10f;
 
-    //無敵時間の長さ
+    // 無敵時間の長さ
     public float invincibilityTime = 2f;
 
     // Rigidbody2Dの参照
@@ -20,13 +22,13 @@ public class Shuyaku_Kari : MonoBehaviour
     // 地上にいるかの判定
     private bool isDashing = false;
 
-    //ヒット回数を記録
+    // ヒット回数を記録
     private int hitCount = 0;
 
-    //主役がやられたかどうか
+    // 主役がやられたかどうか
     private bool isDead = false;
-   
-    //無敵状態かどうか
+
+    // 無敵状態かどうか
     private bool isInvincible = false;
 
     private Animator anim = null;
@@ -54,13 +56,12 @@ public class Shuyaku_Kari : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         vecGavity = new Vector2(0, -Physics2D.gravity.y);
-        //カメラ初期位置
+        // カメラ初期位置
         cameraController.SetPosition(transform.position);
     }
 
     void Update()
     {
-       
         // 横移動とダッシュ
         WalkAndDash();
 
@@ -94,12 +95,12 @@ public class Shuyaku_Kari : MonoBehaviour
 
             rb.velocity += vecGavity * currentJumpM * Time.deltaTime;
 
-            //カメラに自身の座標を渡す
+            // カメラに自身の座標を渡す
             cameraController.SetPosition(transform.position);
         }
     }
 
-    #region//歩行とダッシュの詳細
+    #region // 歩行とダッシュの詳細
     // 歩行とダッシュの処理
     private void WalkAndDash()
     {
@@ -144,15 +145,13 @@ public class Shuyaku_Kari : MonoBehaviour
     }
     #endregion
 
-    #region//ジャンプと接地判定
+    #region // ジャンプと接地判定
     // ジャンプ処理
     private void JumpHandler()
     {
         if (IsGrounded() && (!Input.GetKey(KeyCode.Space) || !Input.GetKey(KeyCode.W) || !Input.GetKey(KeyCode.UpArrow)))
         {
-           
             doubleJump = false;
-            
         }
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -185,7 +184,7 @@ public class Shuyaku_Kari : MonoBehaviour
     }
     #endregion
 
-    #region//接触したときに起きること
+    #region // 接触したときに起きること
     // 敵との接触を管理する処理
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -207,6 +206,12 @@ public class Shuyaku_Kari : MonoBehaviour
                     HitByEnemy(); // それ以外はヒットとして処理
                 }
             }
+        }
+
+        // Trapとの接触処理
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+            HitByTrap(); // Trapに当たった際の処理
         }
     }
 
@@ -235,6 +240,13 @@ public class Shuyaku_Kari : MonoBehaviour
         }
     }
 
+    // Trapに当たった際の処理
+    private void HitByTrap()
+    {
+        anim.SetTrigger("Hit"); // ヒットアニメーションを再生
+        StartCoroutine(DestroyPlayerAfterAnimation()); // プレイヤーを削除
+    }
+
     // プレイヤーを倒した後に削除する処理
     private IEnumerator DestroyPlayerAfterAnimation()
     {
@@ -250,5 +262,4 @@ public class Shuyaku_Kari : MonoBehaviour
         isInvincible = false;
     }
     #endregion
-
 }

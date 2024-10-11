@@ -8,6 +8,7 @@ TagManager:
   - Jimen
   - Ground
   - Enemy
+  - Trap
   layers:
   - Default
   - TransparentFX
