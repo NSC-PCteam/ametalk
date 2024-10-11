@@ -7,9 +7,22 @@ public class Gamemanager : MonoBehaviour
 {
     public static Gamemanager instance = null;
 
+    public string Manual;
+    public string Stage1;
     public string Ametalkclub;
     public string GameClear;
     public string GameOver;
+    public string StartScene;
+
+    public void LoadManual()
+    {
+        SceneManager.LoadScene(Manual);
+    }
+
+    public void LoadStage1()
+    {
+        SceneManager.LoadScene(Stage1);
+    }
 
     public void LoadAmetalkclubScreen()
     {
@@ -23,6 +36,10 @@ public class Gamemanager : MonoBehaviour
     public void LoadGameOverScreen()
     {
         SceneManager.LoadScene(GameOver);
+    }
+    public void LoadStartScreen()
+    {
+        SceneManager.LoadScene(StartScene);
     }
 
     private void Awake() 
