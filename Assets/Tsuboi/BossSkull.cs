@@ -144,7 +144,7 @@ public class BossSkull : MonoBehaviour
         stompCount++;
         StartCoroutine(ActivateInvincibility());  // 無敵状態を一時的に有効化
 
-        if (stompCount >= 5)
+        if (stompCount >= 3)
         {
             anim.SetTrigger("Hit");
             isDead = true;

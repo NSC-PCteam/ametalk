@@ -56,8 +56,7 @@ public class Syuyaku : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         vecGavity = new Vector2(0, -Physics2D.gravity.y);
-        // カメラ初期位置
-        cameraController.SetPosition(transform.position);
+        
     }
 
     void Update()
@@ -95,8 +94,7 @@ public class Syuyaku : MonoBehaviour
 
             rb.velocity += vecGavity * currentJumpM * Time.deltaTime;
 
-            // カメラに自身の座標を渡す
-            cameraController.SetPosition(transform.position);
+            
         }
     }
 

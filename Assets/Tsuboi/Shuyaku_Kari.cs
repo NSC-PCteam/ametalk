@@ -214,7 +214,7 @@ public class Shuyaku_Kari : MonoBehaviour
     private void StompOnEnemy()
     {
         rb.velocity = new Vector2(rb.velocity.x, stompJumpForce); // 少しジャンプさせる
-        anim.SetTrigger("Jump"); // ジャンプアニメーション再生
+        anim.SetTrigger("DoubleJump"); // ジャンプアニメーション再生
     }
 
     // 敵にヒットされた場合の処理
