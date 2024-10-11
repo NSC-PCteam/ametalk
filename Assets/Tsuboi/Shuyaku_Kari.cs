@@ -9,7 +9,7 @@ public class Shuyaku_Kari : MonoBehaviour
     public float dashSpeed = 10f;
 
     //敵を踏んだ後のジャンプ力
-    public float stompJumpForce = 10f;
+    public float stompJumpForce = 2f;
 
     //無敵時間の長さ
     public float invincibilityTime = 2f;
@@ -54,8 +54,7 @@ public class Shuyaku_Kari : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         vecGavity = new Vector2(0, -Physics2D.gravity.y);
-        //カメラ初期位置
-        cameraController.SetPosition(transform.position);
+        
     }
 
     void Update()
@@ -94,8 +93,7 @@ public class Shuyaku_Kari : MonoBehaviour
 
             rb.velocity += vecGavity * currentJumpM * Time.deltaTime;
 
-            //カメラに自身の座標を渡す
-            cameraController.SetPosition(transform.position);
+            
         }
     }
 

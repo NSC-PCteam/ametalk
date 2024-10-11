@@ -4,5 +4,24 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Ametalkclub.unity
+    guid: 9a8c38a40d63971428e7dee65ea8445e
+  - enabled: 1
+    path: Assets/Scenes/Stage1.unity
+    guid: 8f42dc3a6c64d3a48b807d5fc302eb31
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 96270b5b92c080748bfee08f7bd6349a
+  - enabled: 1
+    path: Assets/Scenes/GameClear.unity
+    guid: 3edc3acc9867451498188634ebb32399
+  - enabled: 1
+    path: Assets/Scenes/Start Scene.unity
+    guid: 087cfbe34c578b847a99278f66cc3cd8
+  - enabled: 1
+    path: Assets/Scenes/Manual.unity
+    guid: d5bc4c97436c25748b01dc3dd5262d0c
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

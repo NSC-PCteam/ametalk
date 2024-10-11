@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 
@@ -250,6 +251,7 @@ public class Syuyaku : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f); // ヒットアニメーションの終了待ち
         gameObject.SetActive(false); // プレイヤーを非表示にして削除
+        SceneManager.LoadScene("GameOver");
     }
 
     // 無敵時間を開始する処理

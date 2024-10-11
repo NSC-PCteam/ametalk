@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 3596422906042783164}
   - component: {fileID: 7747919159848303290}
   - component: {fileID: 1035650236031223269}
-  - component: {fileID: 8171601277599077231}
   m_Layer: 0
   m_Name: Syuyaku
   m_TagString: Untagged
@@ -267,31 +266,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8171601277599077231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4992366241421315104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1004840f012558e449cc74a00ea6b6e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
-  dashSpeed: 6
-  stompJumpForce: 10
-  invincibilityTime: 2
-  groundCheckPos: {fileID: 2952584411523252145}
-  fallMultiplier: 2
-  jumpMultiplier: 1.1
-  jumpForce: 4
-  jumpTime: 0.5
-  checkRadius: 0.05
-  Ground:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &8375742996705215949
 GameObject:
   m_ObjectHideFlags: 0

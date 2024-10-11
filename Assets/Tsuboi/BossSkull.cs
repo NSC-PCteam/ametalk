@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 
@@ -198,5 +199,6 @@ public class BossSkull : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);  // アニメーションが完了するまで待機
         gameObject.SetActive(false);  // ボスを非表示にする
+        SceneManager.LoadScene("GameClear");
     }
 }
