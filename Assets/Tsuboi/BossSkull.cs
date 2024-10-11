@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+
+
 public class BossSkull : MonoBehaviour
 {
     public float waveAmplitude = 2f;       // 波移動の振幅
@@ -24,6 +26,8 @@ public class BossSkull : MonoBehaviour
     private bool isInvincible = false;     // 無敵状態かどうか
     private Vector3 moveDirection;         // 現在の進行方向
 
+    public GameObject bigMush;             // BIGMushオブジェクトを参照するための変数
+
     private Rigidbody2D rb;
     private Animator anim;
     private GameObject player;
@@ -34,11 +38,13 @@ public class BossSkull : MonoBehaviour
         anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");  // プレイヤーのタグを持つオブジェクトを探す
         moveDirection = Vector3.left;       // 初期進行方向
+        gameObject.SetActive(false);        // ボスはゲーム開始時に非表示にする
     }
 
     void Update()
     {
         if (isDead || isReturning) return;  // 死亡または戻り中の場合は操作を無効化
+
 
         if (player != null)
         {
@@ -58,15 +64,12 @@ public class BossSkull : MonoBehaviour
     // ボスの波状移動
     private void MoveInWavePattern()
     {
-        // プレイヤーがボスより下にいるときのみ、プレイヤーの方向に進行方向を設定
         if (player.transform.position.y <= transform.position.y)
         {
             moveDirection = (player.transform.position - transform.position).normalized; // プレイヤーの方向
         }
 
-        // 現在の方向に波のオフセットを追加
         Vector3 waveOffset = new Vector3(0, Mathf.Sin(Time.time * waveFrequency) * waveAmplitude, 0);
-
         float currentSpeed = moveSpeed;
 
         if (attackCount >= 2)
@@ -74,10 +77,8 @@ public class BossSkull : MonoBehaviour
             currentSpeed *= speedMultiplier;  // 2回目以降の攻撃で速度を速くする
         }
 
-        // X方向の移動速度に波移動を加算し、Y座標の上限を設定
         rb.velocity = moveDirection * currentSpeed + waveOffset;
 
-        // Y座標の上限と下限を設定
         if (transform.position.y > maxY)
         {
             transform.position = new Vector3(transform.position.x, maxY, transform.position.z);
@@ -87,7 +88,6 @@ public class BossSkull : MonoBehaviour
             transform.position = new Vector3(transform.position.x, minY, transform.position.z);
         }
 
-        // スプライトの方向を反転させる
         if (moveDirection.x > 0)
         {
             transform.localScale = new Vector3(1, 1, 1); // 右向き

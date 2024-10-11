@@ -31,6 +31,8 @@ public class Shuyaku_Kari : MonoBehaviour
 
     private Animator anim = null;
 
+    public CameraController cameraController;
+
     // ジャンプに関連する変数
     [SerializeField] GameObject groundCheckPos;
     [SerializeField] float fallMultiplier; // 落ちるときの速度の乗数
@@ -52,6 +54,8 @@ public class Shuyaku_Kari : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         vecGavity = new Vector2(0, -Physics2D.gravity.y);
+        //カメラ初期位置
+        cameraController.SetPosition(transform.position);
     }
 
     void Update()
@@ -89,6 +93,9 @@ public class Shuyaku_Kari : MonoBehaviour
             }
 
             rb.velocity += vecGavity * currentJumpM * Time.deltaTime;
+
+            //カメラに自身の座標を渡す
+            cameraController.SetPosition(transform.position);
         }
     }
 
