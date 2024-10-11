@@ -4,46 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Traps
-  - Enemy
+
   - Jimen
-  - Apple
   - Ground
+  - Enemy
   - Trap
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Jimen
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
+  - Enemy
+  - Player
