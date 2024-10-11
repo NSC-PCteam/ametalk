@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GoalScript : MonoBehaviour
 {
-    private GameManager gameManager;
+    private Gamemanager gamemanager;
 
     void Start()
     {
         // シーン内の GameManager を探す
-        gameManager = FindObjectOfType<GameManager>();
+        gamemanager = FindObjectOfType<Gamemanager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -17,7 +17,7 @@ public class GoalScript : MonoBehaviour
         // Shuyaku がゴールに触れたとき
         if (collision.CompareTag("Player"))
         {
-            gameManager.GoalReached();
+            gamemanager.GoalReached();
         }
     }
 }
