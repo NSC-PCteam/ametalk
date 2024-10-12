@@ -1,4 +1,4 @@
-# CHALCHALWORLD
+# CHALLCHALLWORLD
 ## 概要
 横スクロールアクション
 ## 操作方法
